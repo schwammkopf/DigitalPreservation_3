@@ -8,5 +8,17 @@
     <artifactId>DigitalPreservation_3</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.dspace</groupId>
+            <artifactId>dspace-api</artifactId>
+            <version>6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>kixi</groupId>
+            <artifactId>ckan</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>
