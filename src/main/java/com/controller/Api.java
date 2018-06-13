@@ -11,9 +11,10 @@ import javax.ws.rs.core.MediaType;
 public class Api {
 
 
-    private final String REST_URI = "https://demo.dspacedirect.org/rest/";
 
     public void listDspace(){
+        final String REST_URI = "https://demo.dspacedirect.org/rest/";
+
         Client client = javax.ws.rs.client.ClientBuilder.newClient();
 
         Community[] communities = client.target(REST_URI+"communities").request(MediaType.APPLICATION_JSON).get(Community[].class);
@@ -34,6 +35,10 @@ public class Api {
         for(int i = 0; i < items.length; i++)
             System.out.println(items[i].toString());
 
+
+    }
+
+    public void listCkan(){
 
     }
 
