@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.dto.ckan.Response;
 import com.dto.dspace.Bitstream;
 import com.dto.dspace.Collection;
 import com.dto.dspace.Community;
@@ -39,6 +40,12 @@ public class Api {
     }
 
     public void listCkan(){
+        final String REST_URI = "https://demo.ckan.org/api/3/action/";
+
+        Client client = javax.ws.rs.client.ClientBuilder.newClient();
+
+        Response response = client.target(REST_URI+"package_search").request(MediaType.APPLICATION_JSON).get(Response.class);
+        System.out.println(response.toString());
 
     }
 
