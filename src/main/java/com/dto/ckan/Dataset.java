@@ -356,6 +356,6 @@ public class Dataset {
                 ", type='" + type + '\'' +
                 ", url='" + url + '\'' +
                 ", version='" + version + '\'' +
-                '}';
+                "}\n";
     }
 }
