@@ -11,5 +11,5 @@ To start the project: start the Main class with the wanted argument
 
 Intellij:
 In Intellij, running configuration can be used.
-![Screenshot](.\Screenshot.png)
+![Screenshot](Screenshot.png)
 
