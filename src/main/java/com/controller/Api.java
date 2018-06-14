@@ -131,6 +131,8 @@ public class Api {
         Resource resource = new Resource();
         resource.setId(item.getId());
         resource.setName(item.getName());
+        //TODO - der richtige package name eingeben
+        resource.setPackageId("gffgdf");
 
         return resource;
     }
