@@ -88,21 +88,26 @@ public class Api {
         //System.out.println(response.getStatusInfo().toString());
 
 
+        System.out.println("Migrating communities...");
         for (Community community: communities
              ) {
             javax.ws.rs.core.Response response = client.target(REST_CKAN_URI+"organization_create").request(MediaType.APPLICATION_JSON).header("Authorization", AUTHORIZATION_KEY).post(Entity.entity(communityToOrganization(community), MediaType.APPLICATION_JSON));
             System.out.println(response.getStatusInfo().toString());
         }
 
+        System.out.println("Migrating collections...");
         for (Collection collection: collections
                 ) {
-            javax.ws.rs.core.Response response = client.target(REST_CKAN_URI+"collection_create").request(MediaType.APPLICATION_JSON).header("Authorization", AUTHORIZATION_KEY).post(Entity.entity(collectionToDataset(collection), MediaType.APPLICATION_JSON));
+            javax.ws.rs.core.Response response = client.target(REST_CKAN_URI+"package_create")
+                    .request(MediaType.APPLICATION_JSON).header("Authorization", AUTHORIZATION_KEY).post(Entity.entity(collectionToDataset(collection), MediaType.APPLICATION_JSON));
             System.out.println(response.getStatusInfo().toString());
         }
 
+        System.out.println("Migrating items...");
         for (Item item: items
                 ) {
-            javax.ws.rs.core.Response response = client.target(REST_CKAN_URI+"item_create").request(MediaType.APPLICATION_JSON).header("Authorization", AUTHORIZATION_KEY).post(Entity.entity(itemToResource(item), MediaType.APPLICATION_JSON));
+            javax.ws.rs.core.Response response = client.target(REST_CKAN_URI+"resource_create")
+                    .request(MediaType.APPLICATION_JSON).header("Authorization", AUTHORIZATION_KEY).post(Entity.entity(itemToResource(item), MediaType.APPLICATION_JSON));
             System.out.println(response.getStatusInfo().toString());
         }
 
