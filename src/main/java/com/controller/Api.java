@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.dto.ckan.Dataset;
+import com.dto.ckan.Group;
 import com.dto.ckan.Organization;
 import com.dto.ckan.Resource;
 import com.dto.ckan.Response;
@@ -13,7 +13,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -98,8 +97,10 @@ public class Api {
         System.out.println("Migrating collections...");
         for (Collection collection: collections
                 ) {
-            javax.ws.rs.core.Response response = client.target(REST_CKAN_URI+"package_create")
-                    .request(MediaType.APPLICATION_JSON).header("Authorization", AUTHORIZATION_KEY).post(Entity.entity(collectionToDataset(collection), MediaType.APPLICATION_JSON));
+            javax.ws.rs.core.Response response = client.target(REST_CKAN_URI+"group_create")
+                    .request(MediaType.APPLICATION_JSON).header("Authorization",
+                            AUTHORIZATION_KEY).post(Entity.entity(collectionToGroup(collection), MediaType
+                            .APPLICATION_JSON));
             System.out.println(response.getStatusInfo().toString());
         }
 
@@ -126,23 +127,21 @@ public class Api {
         return organization;
     }
 
-    private Dataset collectionToDataset(Collection collection){
-        Dataset dataset = new Dataset();
-        dataset.setId(collection.getId());
-        dataset.setType(collection.getType());
-        dataset.setName(collection.getName());
-        dataset.setUrl(collection.getLink());
-        dataset.setNumResources(collection.getNumberItems());
-
-        return dataset;
-    }
-
     private Resource itemToResource(Item item){
         Resource resource = new Resource();
         resource.setId(item.getId());
         resource.setName(item.getName());
 
         return resource;
+    }
+
+    private Group collectionToGroup(Collection collection){
+        Group group = new Group();
+        group.setId(collection.getId());
+        group.setName(collection.getName().toLowerCase().replace(" ","_"));
+        group.setDescription(collection.getShortDescription());
+
+        return group;
     }
 
 
