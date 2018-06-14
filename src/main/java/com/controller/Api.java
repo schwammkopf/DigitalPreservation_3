@@ -119,7 +119,7 @@ public class Api {
     private Organization communityToOrganization(Community community){
         Organization organization = new Organization();
         organization.setId(community.getId());
-        organization.setName(community.getName());
+        organization.setName(community.getName().toLowerCase().replace(" ","_"));
         organization.setType(community.getType());
         organization.setDescription(organization.getDescription());
 
