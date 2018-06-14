@@ -86,6 +86,17 @@ public class Api {
         //javax.ws.rs.core.Response response = client.target(REST_CKAN_URI+"organization_create").request(MediaType.APPLICATION_JSON).header("Authorization", AUTHORIZATION_KEY).post(Entity.entity(communityToOrganization(communities[0]), MediaType.APPLICATION_JSON));
         //System.out.println(response.getStatusInfo().toString());
 
+        Group group = new Group();
+        group.setName("new-demo-package");
+
+        {
+            javax.ws.rs.core.Response response = client.target(REST_CKAN_URI + "package_create")
+                    .request(MediaType.APPLICATION_JSON).header("Authorization",
+                            AUTHORIZATION_KEY).post(Entity.entity(group, MediaType
+                            .APPLICATION_JSON));
+            System.out.println(response.getStatusInfo().toString());
+            System.out.println(response.readEntity(String.class));
+        }
 
         System.out.println("Migrating communities...");
         for (Community community: communities
@@ -131,8 +142,7 @@ public class Api {
         Resource resource = new Resource();
         resource.setId(item.getId());
         resource.setName(item.getName());
-        //TODO - der richtige package name eingeben
-        resource.setPackageId("gffgdf");
+        resource.setPackageId("new-demo-package");
 
         return resource;
     }
